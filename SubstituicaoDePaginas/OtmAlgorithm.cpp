@@ -88,5 +88,5 @@ void OtmAlgorithm::result(){
     }
 
     std::cout << "OTM " << fail << std::endl;
-    delete[] quadros;
 }
+

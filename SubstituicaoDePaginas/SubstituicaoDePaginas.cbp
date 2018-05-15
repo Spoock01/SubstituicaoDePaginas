@@ -33,6 +33,10 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Fifo.h" />
+		<Unit filename="Lru.cpp" />
+		<Unit filename="Lru.h" />
+		<Unit filename="OtmAlgorithm.cpp" />
+		<Unit filename="OtmAlgorithm.h" />
 		<Unit filename="Utils.cpp" />
 		<Unit filename="Utils.h" />
 		<Unit filename="main.cpp" />

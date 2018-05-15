@@ -1,10 +1,11 @@
 # depslib dependency file v1.0
-1526402172 source:c:\users\joaov\documents\github\substituicaodepaginas\substituicaodepaginas\main.cpp
+1526421935 source:c:\users\joaov\documents\github\substituicaodepaginas\substituicaodepaginas\main.cpp
 	<iostream>
 	<fstream>
 	"Utils.h"
 	"Fifo.h"
 	"OtmAlgorithm.h"
+	"Lru.h"
 
 1526342826 c:\users\joaov\documents\github\substituicaodepaginas\substituicaodepaginas\utils.h
 	<iostream>
@@ -24,10 +25,18 @@
 	<stdlib.h>
 	<vector>
 
-1526402985 source:c:\users\joaov\documents\github\substituicaodepaginas\substituicaodepaginas\otmalgorithm.cpp
+1526422291 source:c:\users\joaov\documents\github\substituicaodepaginas\substituicaodepaginas\otmalgorithm.cpp
 	<iostream>
 	"OtmAlgorithm.h"
 
-1526404820 c:\users\joaov\documents\github\substituicaodepaginas\substituicaodepaginas\otmalgorithm.h
+1526420985 c:\users\joaov\documents\github\substituicaodepaginas\substituicaodepaginas\otmalgorithm.h
+	<vector>
+
+1526424109 source:c:\users\joaov\documents\github\substituicaodepaginas\substituicaodepaginas\lru.cpp
+	<iostream>
+	"Lru.h"
+	<vector>
+
+1526419562 c:\users\joaov\documents\github\substituicaodepaginas\substituicaodepaginas\lru.h
 	<vector>
 
