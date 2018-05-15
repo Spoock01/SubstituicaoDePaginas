@@ -9,9 +9,9 @@
 class Fifo {
 
 private:
-    int tamanho;
+    int size = 0;
     std::vector<int> refs;
-    int faults;
+    int fail = 0;
 
     int check(int*, int);
     void init(int*);
@@ -21,16 +21,16 @@ public:
 
 };
 
-Fifo::Fifo(int tamanho, std::vector<int> refs){
-    this->tamanho = tamanho;
+Fifo::Fifo(int size, std::vector<int> refs){
+    this->size = size;
     this->refs = refs;
-    this->faults = 0;
+    this->fail = 0;
 }
 
 int Fifo::check (int *arr, int value){
     int i;
 
-    for(i = 0; i < tamanho; i++)
+    for(i = 0; i < size; i++)
         if(value == arr[i])
             return 1;
 
@@ -41,7 +41,7 @@ int Fifo::check (int *arr, int value){
 void Fifo::init(int *quadros){
     int i;
 
-    for(i = 0; i < tamanho; i++){
+    for(i = 0; i < size; i++){
         quadros[i] = -1;
     }
 }
@@ -49,18 +49,18 @@ void Fifo::init(int *quadros){
 void Fifo::result(){
 
     int index = 0, i;
-    int *quadros = (int *) malloc(sizeof(int) * tamanho);
+    int *quadros = new int(size);
 
     init(quadros);
 
     for(i = 0; i < (int) refs.size(); i++){
 
         if(!check(quadros, refs[i])){
-            quadros[index++ % tamanho] = refs[i];
-            this->faults++;
+            quadros[index++ % size] = refs[i];
+            this->fail++;
         }
     }
-    std::cout << "FIFO " << this->faults << std::endl;
+    std::cout << "FIFO " << this->fail << std::endl;
 }
 
 

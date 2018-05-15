@@ -2,6 +2,7 @@
 #include <fstream>
 #include "Utils.h"
 #include "Fifo.h"
+#include "OtmAlgorithm.h"
 
 using namespace std;
 
@@ -16,6 +17,8 @@ int main()
 
     Fifo *fifo = new Fifo(size, arr);
     fifo->result();
+    OtmAlgorithm *otm = new OtmAlgorithm(size, arr);
+    otm->result();
 
     return 0;
 }
