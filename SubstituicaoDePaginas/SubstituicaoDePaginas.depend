@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1526344542 source:c:\users\joaov\documents\github\substituicaodepaginas\substituicaodepaginas\main.cpp
+	<iostream>
+	<fstream>
+	"Utils.h"
+	"Fifo.h"
+
+1526342826 c:\users\joaov\documents\github\substituicaodepaginas\substituicaodepaginas\utils.h
+	<iostream>
+	<vector>
+
+1526342332 source:c:\users\joaov\documents\github\substituicaodepaginas\substituicaodepaginas\fifo.cpp
+
+1526343001 source:c:\users\joaov\documents\github\substituicaodepaginas\substituicaodepaginas\utils.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	<stdlib.h>
+
+1526344806 c:\users\joaov\documents\github\substituicaodepaginas\substituicaodepaginas\fifo.h
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<vector>
+
