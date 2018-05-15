@@ -36,7 +36,7 @@ bool check(std::vector<int>&quadros, int size, int value){
     // verifica se existem posicoes livres
     ret = isFree(quadros, value);
     if(quadrosLivres && ret >= 0){
-        //std::cout << "inserindo na posicao " << ret <<std::endl;
+        std::cout << "inserindo na posicao " << ret <<std::endl;
         quadros[ret] = value;
         return true;
     }
@@ -50,7 +50,7 @@ bool check(std::vector<int>&quadros, int size, int value){
                 quadros.push_back(value);
                 quadros.erase(quadros.begin() + i);
             }else{
-                quadros.erase(quadros.begin() + 1);
+                quadros.erase(quadros.begin() + i);
                 quadros.insert(quadros.begin() + lastIndex, value);
             }
 
@@ -76,8 +76,8 @@ void Lru::result(){
     int i;
 
     for(i = 0; i < (int)refs.size(); i++){
-        //std::cout << "Posicao: " << i << " Valor: " << refs[i] << std::endl;
-        //printQ(quadros);
+        std::cout << "Posicao: " << i << " Valor: " << refs[i] << std::endl;
+        printQ(quadros);
         if(check(quadros, size, refs[i])){
             fail++;
         }
