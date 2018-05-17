@@ -6,9 +6,9 @@
 class Lru{
 
 public:
-    int size = 0;
+    int size;
     std::vector<int> refs;
-    int fail = 0;
+    int fail;
 
     Lru(int, std::vector<int>);
     void result();

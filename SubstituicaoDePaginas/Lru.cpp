@@ -1,67 +1,17 @@
 #include <iostream>
 #include "Lru.h"
 #include <vector>
+#include <string>
+#include "LruProcess.h"
 
-int lastIndex;
-bool quadrosLivres = true;
+int *counter;
 
 Lru::Lru(int size, std::vector<int> refs){
 
     this->refs = refs;
     this->size = size;
     this->fail = 0;
-
-}
-
-int isFree(std::vector<int> quadros, int value){
-    int i = 0;
-
-    for(i = 0; i < (int) quadros.size(); i++){
-        if(quadros[i] == -1){
-            lastIndex = i;// ultima posicao inserida
-            return i;
-        } else if (quadros[i] == value)
-            return -1;
-    }
-
-
-    quadrosLivres = false;
-    return -1;
-}
-
-bool check(std::vector<int>&quadros, int size, int value){
-
-    int i, ret;
-
-    // verifica se existem posicoes livres
-    ret = isFree(quadros, value);
-    if(quadrosLivres && ret >= 0){
-        std::cout << "inserindo na posicao " << ret <<std::endl;
-        quadros[ret] = value;
-        return true;
-    }
-
-    // se chegar aqui, n existem posicoes livres ou o elemento
-    // ja se encontra em um dos quadros
-    for(i = 0; i < size; i++){
-
-        if(quadros[i] == value){
-            if(!quadrosLivres){
-                quadros.push_back(value);
-                quadros.erase(quadros.begin() + i);
-            }else{
-                quadros.erase(quadros.begin() + i);
-                quadros.insert(quadros.begin() + lastIndex, value);
-            }
-
-            return false;
-        }
-    }
-
-
-
-    return true;   // Retorna TRUE caso o valor não esteja nos quadros
-
+    counter = new int(size);
 }
 
 void printQ(std::vector<int> &quadros){
@@ -69,19 +19,92 @@ void printQ(std::vector<int> &quadros){
               << quadros[2] << " " << quadros[3] << std::endl;
 }
 
+int isFree(std::vector<LruProcess> quadros){
+    int i;
+    for(i = 0; i < (int) quadros.size(); i++){
+        if(quadros[i].getTime() == -1){
+            return i;
+        }
+    }
+    return -1;
+
+}
+
+int checkTime(std::vector<LruProcess> quadros, int timeMax){
+
+    int menor = timeMax + 1, i, index = 0; // Maior valor de tempo eh igual ao timeMax
+
+    for (i = 0; i < (int)quadros.size(); i++){
+        if(quadros[i].getTime() < menor){
+            menor = quadros[i].getTime();
+            index = i;
+        }
+    }
+    return index;
+}
+
+void printLruProcess(std::vector<LruProcess> aux, std::string type){
+
+    for(int i = 0; i < aux.size(); i++){
+        std::cout << type << " Valor: " << aux[i].getValue() << " TIME: " << aux[i].getTime()  <<  " ";
+    }
+    std::cout << std::endl;
+}
+
+bool check(std::vector<LruProcess> &quadros, std::vector<LruProcess> &refs, int size,int index){
+    int i;
+    bool ret = true;
+
+    for(i = 0; i < size; i++){
+
+        if(refs[index].getValue() == quadros[i].getValue()){
+            ret = false;
+            refs[index].setTime(index);
+            quadros[i] = refs[index];
+            break;
+        }
+    }
+
+    if(ret){ // Caso nao esteja nos quadros
+
+        int insertIndex = isFree(quadros);
+
+        if(insertIndex == -1){  // Nao tem quadros disponiveis
+            insertIndex = checkTime(quadros, index); // Procura indice com menor tempo
+            refs[index].setTime(index); // Modifica
+            quadros[insertIndex] = refs[index];
+        }else{
+            refs[index].setTime(index);
+            quadros[insertIndex] = refs[index];
+        }
+    }
+    return ret;
+}
+
+void initCounter(std::vector<LruProcess> &refs, std::vector<int> &refs1,
+                 std::vector<LruProcess> &quadros, int size){
+    int i;
+
+    for(i = 0; i < (int)refs1.size(); i++)
+        refs.push_back(*new LruProcess(-1, refs1[i]));
+
+    for(i = 0; i < size; i++)
+        quadros.push_back(*new LruProcess(-1, -1));
+
+}
 
 void Lru::result(){
 
-    std::vector<int> quadros(size, -1);
-    int i;
+    std::vector<LruProcess> quadros;
+    std::vector<LruProcess> refsLru;
 
-    for(i = 0; i < (int)refs.size(); i++){
-        std::cout << "Posicao: " << i << " Valor: " << refs[i] << std::endl;
-        printQ(quadros);
-        if(check(quadros, size, refs[i])){
+    int i;
+    initCounter(refsLru, refs, quadros, size);
+
+    for(i = 0; i < (int)refsLru.size(); i++)
+        if(check(quadros, refsLru, size, i))
             fail++;
-        }
-    }
+
 
     std::cout << "LRU " << fail << std::endl;
 }

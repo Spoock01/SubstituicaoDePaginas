@@ -9,9 +9,9 @@
 class Fifo {
 
 private:
-    int size = 0;
+    int size;
     std::vector<int> refs;
-    int fail = 0;
+    int fail;
 
     int check(int*, int);
     void init(int*);

@@ -35,6 +35,7 @@
 		<Unit filename="Fifo.h" />
 		<Unit filename="Lru.cpp" />
 		<Unit filename="Lru.h" />
+		<Unit filename="LruProcess.h" />
 		<Unit filename="OtmAlgorithm.cpp" />
 		<Unit filename="OtmAlgorithm.h" />
 		<Unit filename="Utils.cpp" />

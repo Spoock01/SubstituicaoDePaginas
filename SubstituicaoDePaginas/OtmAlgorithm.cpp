@@ -57,19 +57,20 @@ int OtmAlgorithm::getTradeIndex(int *quadros, int actIndex){
     for(i = 0; i < size; i++){
 
         aux = actIndex + 1;
+
         test = true;
         for(; aux < (int) refs.size(); aux++)
-            if(refs[aux] == quadros[i] && aux > last){
-                index = i;
-                last = aux;
+            if(refs[aux] == quadros[i]){
+                if(aux > last){
+                    last = aux;
+                    index = i;
+                }
                 test= false;
                 break;
             }
 
         if(test)
             return i;
-
-
     }
 
     return index;
