@@ -14,11 +14,6 @@ Lru::Lru(int size, std::vector<int> refs){
     counter = new int(size);
 }
 
-void printQ(std::vector<int> &quadros){
-    std::cout << "Quadros: " << quadros[0] << " "<< quadros[1] << " "
-              << quadros[2] << " " << quadros[3] << std::endl;
-}
-
 int isFree(std::vector<LruProcess> quadros){
     int i;
     for(i = 0; i < (int) quadros.size(); i++){
@@ -43,27 +38,18 @@ int checkTime(std::vector<LruProcess> quadros, int timeMax){
     return index;
 }
 
-void printLruProcess(std::vector<LruProcess> aux, std::string type){
-
-    for(int i = 0; i < aux.size(); i++){
-        std::cout << type << " Valor: " << aux[i].getValue() << " TIME: " << aux[i].getTime()  <<  " ";
-    }
-    std::cout << std::endl;
-}
-
 bool check(std::vector<LruProcess> &quadros, std::vector<LruProcess> &refs, int size,int index){
     int i;
     bool ret = true;
 
-    for(i = 0; i < size; i++){
-
+    for(i = 0; i < size; i++)
         if(refs[index].getValue() == quadros[i].getValue()){
             ret = false;
             refs[index].setTime(index);
             quadros[i] = refs[index];
             break;
         }
-    }
+
 
     if(ret){ // Caso nao esteja nos quadros
 
@@ -73,7 +59,8 @@ bool check(std::vector<LruProcess> &quadros, std::vector<LruProcess> &refs, int 
             insertIndex = checkTime(quadros, index); // Procura indice com menor tempo
             refs[index].setTime(index); // Modifica
             quadros[insertIndex] = refs[index];
-        }else{
+        }
+        else{
             refs[index].setTime(index);
             quadros[insertIndex] = refs[index];
         }

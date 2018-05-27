@@ -7,6 +7,9 @@ OtmAlgorithm::OtmAlgorithm(int size, std::vector<int>refs){
     this->fail = 0;
 }
 
+/*
+    INICIALIZA TODOS OS QUADROS COM VALOR -1
+*/
 void init (int *quadros, int size) {
     int i;
 
@@ -29,6 +32,12 @@ bool check(int *quadros, int value, int size){
     }
     return true;
 }
+
+/*
+    CASO OCORRA UMA FALTA DE PAGINA, 'getTradeIndex'
+    BUSCARA INDICE ONDE DEVE SER INSERIDO
+
+*/
 
 int OtmAlgorithm::getTradeIndex(int *quadros, int actIndex){
     int i, index = 0, aux = actIndex, last = -1;
@@ -75,6 +84,7 @@ int OtmAlgorithm::getTradeIndex(int *quadros, int actIndex){
 
     return index;
 }
+
 
 void OtmAlgorithm::result(){
     int *quadros = new int(size), i;
